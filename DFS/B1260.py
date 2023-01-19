@@ -1,3 +1,9 @@
+'''
+1.엣지 개수가 최대 10000개까지 나오므로 sys.stdin.readline 사용
+2.인덱스로 노드에 접근하는 것보다 노드 자체로 그래프를 만들어서
+  해당 노드의 연결노드를 정렬시켜 탐색하는 것이 빠르다.
+  인덱스로 만든다면 연결되지 않는 노드도 탐색해야한다.
+'''
 from collections import deque
 
 N,M,V = map(int,input().split())
