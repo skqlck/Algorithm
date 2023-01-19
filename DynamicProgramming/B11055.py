@@ -9,7 +9,16 @@ DP[i]의 값은 부분 수열의 가장 큰 값이 A[i]인 수열의 합!
 N = int(input())
 A = list(map(int,input().split()))
 DP = [0 for _ in range(N)]
-DP[0] = A[0]
+DP[:] = A[:]
+'''
+DP의 초기값을 A와 같게 설정하는 이유?
+초기값 -> A = [100,10,91], DP = [100,0,0] 으로 설정
+i == 1 -> DP = [10000,0,0]
+i == 2 -> DP = [10000,0,91]
+DP의 초기값이 0이므로 후에 부분수열에서 해당 원소를 포함하지 않는 것처럼 됨 
+'''
 for i in range(1,N):
-    DP[i] = max(DP[j] for j in range(i) if A[j]<A[i])+A[i]
+    for j in range(i):
+        if A[j] < A[i]:
+            DP[i] = max(DP[j]+A[i],DP[i])
 print(max(DP))
