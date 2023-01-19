@@ -36,10 +36,3 @@ else:
     for i in range(3,N):
         DP[i] = max(DP[i-2],DP[i-3]+stairs[i-1]) + stairs[i]
     print(DP[N-1])
-
-
-def add(n):
-    if n<=1:
-        return 1
-    else:
-        return add(n-1) + 1
