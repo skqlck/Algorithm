@@ -40,7 +40,7 @@ distance = [-1]*(N+1)
 for c in cycle:
     distance[c] = 0
 visited = [0]*(N+1)
-
+visited[cycle[0]] = 1
 def bfs():
     queue = deque()
     queue.append(cycle[0])
@@ -55,4 +55,4 @@ def bfs():
                     distance[v] = distance[u]+1
                     queue.append(v)
 bfs()
-print(distance[1:])
+print(' '.join(map(str,(distance[1:]))))
