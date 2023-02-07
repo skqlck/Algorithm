@@ -15,8 +15,8 @@ for test_case in range(1,1+T):
                 continue
         if calendar[x][y] == N**2:
             break
-        nx,ny = x-dx[idx], y-dy[idx]
         idx = (idx+1)%4
+
     print(f"#{test_case}")
     for row in calendar:
         print(*row)
