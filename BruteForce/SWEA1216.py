@@ -4,7 +4,7 @@
 시간이 훨씬 단축된다.
 """
 import sys
-sys.stdin = open("input.txt","r")
+sys.stdin = open("회문2_input.txt","r")
 # def hoimoon_block(N,M):
 #     for i in range(N):
 #         for j in range(N - M + 1):
@@ -49,6 +49,7 @@ for test_case in range(1, 11):
                 if line[start] == line[end]:
                     if hoimoon_line(line, start, end):
                         answer = end - start + 1
+                        break
 
     for line in zip(*board):
         line = ''.join(line)
@@ -57,7 +58,7 @@ for test_case in range(1, 11):
                 if line[start] == line[end]:
                     if hoimoon_line(line, start, end):
                         answer = end - start + 1
-
+                        break
     print(f"#{test_case} {answer}")
 
 
