@@ -1,35 +1,31 @@
-def dfs(N,K):
+def swap(String,a,b):
+    ls = list(String)
+    ls[a],ls[b] = ls[b],ls[a]
+    return ''.join(ls)
+
+def backtrack(M,depth):
     global answer
-    if sorted(N,reverse=True) == N:
-        if K%2 == 0:
-            pass
-        else:
-            N[-1],N[-2] = N[-2],N[-1]
-        answer = max(answer,N)
+
+    if depth == 0:
+        answer = max(answer,M)
         return
 
-    if K == 0:
-        if answer < N:
-            answer = N
-            return
-
-    for i in range(len(N)-1,0,-1):
-        for j in range(i-1,-1,-1):
-            if not visited[i] and not visited[j]:
-                if N[i] < N[j]:
-                    N[i],N[j] = N[j],N[i]
-                    visited[i] = 1
-                    visited[j] = 1
-                    dfs(N,K-1)
-                    visited[i] = 0
-                    visited[j] = 0
-                    N[i], N[j] = N[j], N[i]
+    for i in range(n-1):
+        for j in range(i+1,n):
+            newM = swap(M,i,j)
+            if newM not in visited[depth-1]:
+                visited[depth-1].add(newM)
+                backtrack(newM,depth-1)
 
 T = int(input())
 for test_case in range(1,1+T):
-    N, K = input().split()
+    N,K = input().split()
     K = int(K)
-    answer = '0'
-    visited = [0]*len(N)
-    dfs(N,K)
+    n = len(N)
+    if K%2:
+        answer = swap(N, 0, 1)
+    else:
+        answer = N
+    visited = {k: set() for k in range(K)}
+    backtrack(N,K)
     print(f"#{test_case} {answer}")
