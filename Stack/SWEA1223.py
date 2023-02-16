@@ -41,7 +41,10 @@ def cal_postfix(expression):
             stack.append(cal(a,b,char))
     return stack[0]
 
-expression = '(6+5*(2-8)/2)'
-post = postfix(expression)
-result = cal_postfix(post)
-print(result)
+import sys
+sys.stdin = open("input.txt","r")
+
+for test_case in range(1,11):
+    input()
+    expression = input().strip()
+    print(f"#{test_case} {cal_postfix(postfix(expression))}")
