@@ -1,6 +1,4 @@
 from collections import deque
-import sys
-sys.stdin = open("sample_input.txt","r")
 
 D = [[],
      [(1,0),(-1,0),(0,1),(0,-1)],
