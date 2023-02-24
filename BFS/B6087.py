@@ -1,39 +1,61 @@
 # import sys
-# input = sys.stdin.readline
+# sys.stdin = open("input.txt","r")
+""""""
 from collections import deque
-def balsa(start_x,start_y):
+
+def balsa(x,y):
     dx,dy = [1,-1,0,0],[0,0,1,-1]
     queue = deque()
-    queue.append((start_x,start_y,-1))
+    # 초기화
+    for i in range(4):
+        nx,ny = x+dx[i],y+dy[i]
+        while 0<=nx<N and 0<=ny<M:
+            if graph[nx][ny] == '.':
+                visited[nx][ny] = 0
+                queue.append((nx,ny))
+            elif (nx,ny) == end:
+                print(0)
+                return
+            else:
+                break
+            nx += dx[i]
+            ny += dy[i]
+
     while queue:
-        x,y,mirror = queue.popleft()
-        for i in range(4):
-            nx,ny = x+dx[i],y+dy[i]
-            while 0 <= nx < N and 0 <= ny < M:
-                if not visited[nx][ny] and graph[nx][ny] == '.':
-                        visited[nx][ny] = 1
-                        queue.append((nx,ny,mirror+1))
-                        nx += dx[i]
-                        ny += dy[i]
-                elif not visited[nx][ny] and graph[nx][ny] == 'C':
-                        print(mirror+1)
+        for _ in range(len(queue)):
+            x,y = queue.popleft()
+            for i in range(4):
+                nx,ny = x+dx[i],y+dy[i]
+                while 0<=nx<N and 0<=ny<M:
+                    if graph[nx][ny] == '.':
+                        if visited[nx][ny] == -1:
+                            visited[nx][ny] = visited[x][y] + 1
+                            queue.append((nx,ny))
+                        elif visited[nx][ny] == visited[x][y] + 1:
+                            pass
+                        else:
+                            break
+                    elif (nx,ny) == end:
+                        print(visited[x][y]+1)
                         return
-                else:
-                    break
+                    else:
+                        break
+                    nx += dx[i]
+                    ny += dy[i]
 
 M,N = map(int,input().split())
-graph = [list(input().rstrip()) for _ in range(N)]
-visited = [[0 for _ in range(M)] for _ in range(N)]
-flag = False
+graph = []
+start,end = tuple(),tuple()
 for i in range(N):
+    line = list(input().rstrip())
+    graph.append(line)
     for j in range(M):
-        if graph[i][j] == "C":
-            x, y = i, j
-            flag = True
-            break
-    if flag:
-        break
-visited[x][y] = 1
+        if line[j] == "C":
+            if start:
+                end = (i,j)
+                break
+            start = (i,j)
+visited = [[-1 for _ in range(M)] for _ in range(N)]
+x,y = start
+visited[x][y] = 0
 balsa(x,y)
-
-

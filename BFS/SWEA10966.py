@@ -1,5 +1,5 @@
 import sys
-sys.stdin = open("sample_input.txt","r")
+sys.stdin = open("../BruteForce/sample_input.txt", "r")
 from collections import deque
 
 dx,dy = [1, -1, 0, 0], [0, 0, 1, -1]

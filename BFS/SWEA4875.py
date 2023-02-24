@@ -1,5 +1,5 @@
 import sys
-sys.stdin = open("sample_input.txt","r")
+sys.stdin = open("../BruteForce/sample_input.txt", "r")
 
 from collections import deque
 def bfs():
