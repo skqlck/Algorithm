@@ -5,32 +5,30 @@ def can_attach(x,y,k):
                 return False
             if paper[nx][ny] == 0:
                 return False
-            if visited[nx][ny]:
-                return False
     return True
 def attach(x,y,k):
     for nx in range(x,x+k):
         for ny in range(y,y+k):
-            visited[nx][ny] = 1
+            paper[nx][ny] = 0
 def detach(x,y,k):
     for nx in range(x,x+k):
         for ny in range(y,y+k):
-            visited[nx][ny] = 0
+            paper[nx][ny] = 1
 def dfs(depth,cnt):
     global answer
     if depth >= answer:
         return
-    if cnt == total:
+    if cnt == 0:
         answer = min(answer,depth)
         return
     for x in range(10):
         for y in range(10):
-            if paper[x][y] == 1 and not visited[x][y]:
+            if paper[x][y] == 1:
                 for k in range(5,0,-1):
                     if color_paper[k] and can_attach(x,y,k):
                         attach(x,y,k)
                         color_paper[k] -= 1
-                        dfs(depth+1,cnt+k**2)
+                        dfs(depth+1,cnt-k**2)
                         detach(x,y,k)
                         color_paper[k] += 1
 
@@ -41,7 +39,6 @@ for i in range(10):
         if paper[i][j] == 1:
             total += 1
 color_paper = [0,5,5,5,5,5]
-visited = [[0]*10 for _ in range(10)]
 answer = 25
 if total:
     for x in range(10):
@@ -51,14 +48,11 @@ if total:
                     if color_paper[k] and can_attach(x,y,k):
                         attach(x,y,k)
                         color_paper[k] -= 1
-                        dfs(1,k**2)
+                        dfs(1,total-k**2)
                         detach(x,y,k)
                         color_paper[k] += 1
-                    print(*visited)
                 if answer == 25:
                     print(-1)
                 else:
                     print(answer)
                 exit(0)
-else:
-    print(0)
