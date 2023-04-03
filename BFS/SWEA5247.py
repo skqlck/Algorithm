@@ -6,25 +6,25 @@ T = int(input())
 for test_case in range(1,1+T):
     N,M = map(int,input().split())
     queue = deque()
-    visited = [0]*(10**6+1)
-    visited[N] = 1
+    visited = set()
+    visited.add(1)
     queue.append((N,0))
     while queue:
         number,step = queue.popleft()
         if number == M:
             break
-        if number+1 <= 1000000 and not visited[number+1]:
+        if number+1 <= 1000000 and number+1 not in visited:
             queue.append((number+1,step+1))
-            visited[number+1] = 1
-        if 0 < number-1 <= 1000000 and not visited[number-1]:
+            visited.add(number+1)
+        if 0 < number-1 <= 1000000 and number-1 not in visited:
             queue.append((number-1,step+1))
-            visited[number-1] = 1
-        if number <= 500000 and not visited[number*2]:
+            visited.add(number-1)
+        if number <= 500000 and number*2 not in visited:
             queue.append((number*2,step+1))
-            visited[number*2] = 1
-        if 0 < number - 10 and not visited[number-10]:
+            visited.add(number*2)
+        if 0 < number - 10 and number-10 not in visited:
             queue.append((number-10,step+1))
-            visited[number-10] = 1
+            visited.add(number-10)
     print(f"#{test_case} {step}")
 """
 Version 2

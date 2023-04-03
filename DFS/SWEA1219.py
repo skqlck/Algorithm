@@ -2,8 +2,7 @@
 0출발 99도착
 단방향 엣지
 """
-import sys
-sys.stdin = open("input.txt","r")
+
 def dfs(start):
     global exist
     if exist:

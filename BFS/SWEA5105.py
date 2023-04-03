@@ -16,8 +16,9 @@ def bfs(start_x,start_y):
             elif maze[nx][ny] == 0:
                 visited[nx][ny] = 1
                 queue.append((nx,ny,step+1))
-    else:
-        print(f"#{test_case} 0")
+
+    print(f"#{test_case} 0")
+    return
 
 T = int(input())
 for test_case in range(1,1+T):
@@ -34,6 +35,5 @@ for test_case in range(1,1+T):
         if flag:
             break
     visited = [[0 for _ in range(N)] for _ in range(N)]
-    visited[start_x][start_y] = 1
     visited[start_x][start_y] = 1
     bfs(start_x,start_y)

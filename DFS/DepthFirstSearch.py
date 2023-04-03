@@ -1,5 +1,3 @@
-import sys
-sys.stdin = open("DFS/input.txt","r")
 N = int(input())
 graph = [[] for _ in range(N)]
 E = int(input())
