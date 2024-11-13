@@ -17,8 +17,7 @@ public class B14466 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());       K = Integer.parseInt(st.nextToken());
         R = Integer.parseInt(st.nextToken());
 
         isRoad = new boolean[N+1][N+1][N+1][N+1];
